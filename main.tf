@@ -14,7 +14,6 @@ resource "aws_lambda_function" "ec2" {
   handler          = "lambda_function.lambda_handler"
   filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
-  tags             = var.tags
   timeout          = 10
 
   environment {
@@ -38,7 +37,6 @@ data "archive_file" "lambda_zip" {
 #--------------- Lambda IAM Permissions-----------------------------------------
 resource "aws_iam_role" "lambda" {
   name               = "${var.name}-iam-role"
-  tags               = var.tags
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -57,7 +55,6 @@ EOF
 
 resource "aws_iam_policy" "lambda" {
   name   = "${var.name}-policy"
-  tags   = var.tags
   policy = <<EOF
 {
       "Version": "2012-10-17",
@@ -100,7 +97,6 @@ resource "aws_cloudwatch_log_group" "lambda" {
   for_each          = local.scheduler_actions
   name              = "/aws/lambda/${var.name}-to-${each.key}"
   retention_in_days = 7
-  tags              = var.tags
 }
 
 #--------------- Lambda Triggers------------------------------------------------
@@ -109,7 +105,6 @@ resource "aws_cloudwatch_event_rule" "ec2" {
   name                = "${var.name}-trigger-to-${each.key}-ec2"
   description         = "Invoke Lambda via AWS EventBridge"
   schedule_expression = each.value
-  tags                = var.tags
 }
 
 resource "aws_lambda_permission" "ec2" {
