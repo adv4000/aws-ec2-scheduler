@@ -20,11 +20,3 @@ variable "start_cron_schedule" {
   description = "Cron Expression when to START Servers in UTC Time zone"
   default     = "cron(00 07 * * ? *)"
 }
-
-variable "tags" {
-  description = "Tags to apply to resources"
-  default = {
-    Developer = "ADV-IT"
-    Author    = "Denis Astahov"
-  }
-}
