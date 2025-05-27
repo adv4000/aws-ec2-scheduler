@@ -1,3 +1,11 @@
+# ------------------------------------------------------------------------------
+# Lambda Function to STOP/START EC2 Instances with specific TAG
+#
+# Version  Date          Name                       Info
+# 1.0      10-Dec-2022   Denis Astahov          Initial Version
+# 1.1      27-May-2025   Yaroslav Kovalevskyi   Minor improvements
+# ------------------------------------------------------------------------------
+
 import boto3
 import os
 
