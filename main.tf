@@ -50,12 +50,7 @@ resource "aws_iam_role" "lambda" {
       },
     ]
   })
-
-  tags = {
-    tag-key = "tag-value"
-  }
 }
-
 
 resource "aws_iam_policy" "lambda" {
   name = "${var.name}-policy"
