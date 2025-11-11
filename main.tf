@@ -10,7 +10,7 @@ resource "aws_lambda_function" "ec2" {
   function_name    = "${var.name}-to-${each.key}"
   description      = "Lambda to ${each.key} EC2 Instances with specific Tag"
   role             = aws_iam_role.lambda.arn
-  runtime          = "python3.9"
+  runtime          = "python3.13"
   handler          = "lambda_function.lambda_handler"
   filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
